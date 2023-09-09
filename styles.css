@@ -1,0 +1,10 @@
+.calculator {
+  width: 500px;
+  height: 600px;
+}
+
+.calcDisplay {
+  width: 200px;
+  height: 20px;
+  background-color: grey;
+}

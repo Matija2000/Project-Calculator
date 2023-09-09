@@ -1,3 +1,6 @@
+const digits = document.querySelectorAll(".digit");
+let calcDisplay = document.querySelector(".calcDisplay");
+
 function add(x, y) {
   return x + y;
 }
@@ -28,3 +31,11 @@ function operate(operator, firstNumber, secondNumber) {
     return divide(firstNumber, secondNumber);
   }
 }
+
+let displayValue;
+digits.forEach((digit) => {
+  digit.addEventListener("click", () => {
+    displayValue = calcDisplay.textContent += digit.textContent;
+    console.log(displayValue);
+  });
+});
