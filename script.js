@@ -72,11 +72,17 @@ buttons.forEach((button) => {
   button.addEventListener("click", () => {
     displayValue = "";
     updateDisplay();
+
     if (firstNumber && secondNumber) {
-      firstNumber = operate(operator, firstNumber, secondNumber);
-      console.log(firstNumber);
+      firstNumber = operate(
+        operator,
+        Number(firstNumber),
+        Number(secondNumber)
+      );
+
       calcDisplay.textContent = firstNumber;
     }
+    calcDisplay.textContent = firstNumber;
     operator = button.textContent;
   });
 });
@@ -85,7 +91,17 @@ bEquals.addEventListener("click", () => {
   displayValue = "";
   updateDisplay();
   if (firstNumber && secondNumber) {
-    firstNumber = operate(operator, firstNumber, secondNumber);
+    firstNumber = operate(operator, Number(firstNumber), Number(secondNumber));
+
     calcDisplay.textContent = firstNumber;
   }
+  calcDisplay.textContent = firstNumber;
+});
+
+bClear.addEventListener("click", () => {
+  displayValue = "";
+  updateDisplay();
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
 });
