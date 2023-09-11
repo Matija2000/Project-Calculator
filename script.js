@@ -7,6 +7,7 @@ const bDivide = document.querySelector(".divide");
 const bEquals = document.querySelector(".equals");
 const bClear = document.querySelector(".clear");
 const buttons = document.querySelectorAll(".operation");
+const dot = document.querySelector(".dot");
 
 function add(x, y) {
   return x + y;
@@ -74,9 +75,9 @@ buttons.forEach((button) => {
         Number(secondNumber)
       );
 
-      calcDisplay.textContent = firstNumber;
+      calcDisplay.textContent = showResult();
     }
-    calcDisplay.textContent = firstNumber;
+    calcDisplay.textContent = showResult();
     operator = button.textContent;
   });
 });
@@ -86,10 +87,8 @@ bEquals.addEventListener("click", () => {
   updateDisplay();
   if (firstNumber && secondNumber) {
     firstNumber = operate(operator, Number(firstNumber), Number(secondNumber));
-
-    calcDisplay.textContent = firstNumber;
   }
-  calcDisplay.textContent = firstNumber;
+  calcDisplay.textContent = showResult();
   secondNumber = "";
 });
 
@@ -100,3 +99,11 @@ bClear.addEventListener("click", () => {
   secondNumber = "";
   operator = "";
 });
+
+function showResult() {
+  if (firstNumber.toString().length >= 16) {
+    return firstNumber.toString().slice(0, 16);
+  } else {
+    return firstNumber;
+  }
+}
