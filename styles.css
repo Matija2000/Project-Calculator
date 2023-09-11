@@ -1,5 +1,10 @@
 body {
-  font-size: 30px;
+  margin: 0;
+  font-size: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calculator {
@@ -41,4 +46,10 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
+}
+
+.clear,
+.operation,
+.equals {
+  background-color: #888888;
 }
