@@ -21,12 +21,6 @@ function divide(x, y) {
   return x / y;
 }
 
-function calculatorOperation(firstNumber, z, secondNumber) {
-  let x = firstNumber;
-  let operator = z;
-  let y = secondNumber;
-}
-
 function operate(operator, firstNumber, secondNumber) {
   if (operator === bAdd.textContent) {
     return add(firstNumber, secondNumber);
