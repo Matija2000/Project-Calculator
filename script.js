@@ -90,6 +90,7 @@ bEquals.addEventListener("click", () => {
     calcDisplay.textContent = firstNumber;
   }
   calcDisplay.textContent = firstNumber;
+  secondNumber = "";
 });
 
 bClear.addEventListener("click", () => {
