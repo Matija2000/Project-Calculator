@@ -44,11 +44,13 @@ function updateDisplay() {
 }
 
 function getFirstNumber() {
-  firstNumber = displayValue;
+  firstNumber = Number(displayValue);
+  console.log("First Number:", firstNumber);
 }
 
 function getSecondNumber() {
-  secondNumber = displayValue;
+  secondNumber = Number(displayValue);
+  console.log("Second Number:", secondNumber);
 }
 
 digits.forEach((digit) => {
@@ -74,6 +76,7 @@ buttons.forEach((button) => {
         Number(firstNumber),
         Number(secondNumber)
       );
+      console.log("Result(firstNumber):", firstNumber);
 
       calcDisplay.textContent = showResult();
     }
@@ -85,9 +88,10 @@ buttons.forEach((button) => {
 bEquals.addEventListener("click", () => {
   displayValue = "";
   updateDisplay();
-  if (firstNumber && secondNumber) {
+  if (firstNumber || (firstNumber == 0 && secondNumber)) {
     firstNumber = operate(operator, Number(firstNumber), Number(secondNumber));
   }
+  console.log("Result(firstNumber):", firstNumber);
   calcDisplay.textContent = showResult();
   secondNumber = "";
 });
@@ -104,6 +108,6 @@ function showResult() {
   if (firstNumber.toString().length >= 16) {
     return firstNumber.toString().slice(0, 16);
   } else {
-    return firstNumber;
+    return Number(firstNumber);
   }
 }
