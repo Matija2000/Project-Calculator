@@ -45,12 +45,10 @@ function updateDisplay() {
 
 function getFirstNumber() {
   firstNumber = Number(displayValue);
-  console.log("First Number:", firstNumber);
 }
 
 function getSecondNumber() {
   secondNumber = Number(displayValue);
-  console.log("Second Number:", secondNumber);
 }
 
 digits.forEach((digit) => {
@@ -67,41 +65,59 @@ digits.forEach((digit) => {
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (secondNumber === 0 && operator === bDivide.textContent) {
+      calcDisplay.textContent = "LOL";
+      resetValues();
+    } else {
+      displayValue = "";
+      updateDisplay();
+
+      if (firstNumber && secondNumber) {
+        firstNumber = operate(
+          operator,
+          Number(firstNumber),
+          Number(secondNumber)
+        );
+
+        calcDisplay.textContent = showResult();
+      }
+
+      if (!(firstNumber === "")) {
+        calcDisplay.textContent = showResult();
+        operator = button.textContent;
+      }
+
+      console.log("firstNumber:", firstNumber);
+      console.log("secondNumber:", secondNumber);
+    }
+  });
+});
+
+bEquals.addEventListener("click", () => {
+  if (secondNumber === 0 && operator === bDivide.textContent) {
+    calcDisplay.textContent = "LOL";
+    resetValues();
+  } else {
     displayValue = "";
     updateDisplay();
 
-    if (firstNumber && secondNumber) {
+    if (firstNumber || (firstNumber == 0 && secondNumber)) {
       firstNumber = operate(
         operator,
         Number(firstNumber),
         Number(secondNumber)
       );
-      console.log("Result(firstNumber):", firstNumber);
-
-      calcDisplay.textContent = showResult();
     }
-    calcDisplay.textContent = showResult();
-    operator = button.textContent;
-  });
-});
-
-bEquals.addEventListener("click", () => {
-  displayValue = "";
-  updateDisplay();
-  if (firstNumber || (firstNumber == 0 && secondNumber)) {
-    firstNumber = operate(operator, Number(firstNumber), Number(secondNumber));
+    if (!(firstNumber === "")) {
+      calcDisplay.textContent = showResult();
+      secondNumber = "";
+    }
   }
-  console.log("Result(firstNumber):", firstNumber);
-  calcDisplay.textContent = showResult();
-  secondNumber = "";
 });
 
 bClear.addEventListener("click", () => {
-  displayValue = "";
+  resetValues();
   updateDisplay();
-  firstNumber = "";
-  secondNumber = "";
-  operator = "";
 });
 
 function showResult() {
@@ -110,4 +126,11 @@ function showResult() {
   } else {
     return Number(firstNumber);
   }
+}
+
+function resetValues() {
+  displayValue = "";
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
 }
