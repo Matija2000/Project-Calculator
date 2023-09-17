@@ -38,13 +38,22 @@ let secondNumber = "";
 let operator = "";
 let result = "";
 let displayValue = "";
+let firstMinus = "";
 
 function updateDisplay() {
-  calcDisplay.textContent = displayValue;
+  if (firstMinus) {
+    calcDisplay.textContent = firstMinus + displayValue;
+  } else {
+    calcDisplay.textContent = displayValue;
+  }
 }
 
 function getFirstNumber() {
-  firstNumber = Number(displayValue);
+  if (firstMinus) {
+    firstNumber = firstMinus + displayValue;
+  } else {
+    firstNumber = Number(displayValue);
+  }
 }
 
 function getSecondNumber() {
@@ -55,7 +64,10 @@ digits.forEach((digit) => {
   digit.addEventListener("click", () => {
     displayValue += digit.textContent;
     updateDisplay();
-    if (!operator) {
+    if (
+      !operator ||
+      (firstNumber === "" && secondNumber === "" && firstMinus)
+    ) {
       getFirstNumber();
     } else {
       getSecondNumber();
@@ -65,6 +77,11 @@ digits.forEach((digit) => {
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
+    firstMinus = "";
+    if (firstNumber === "" && secondNumber === "" && button === bSubtract) {
+      firstMinus = "-";
+    }
+    console.log(firstMinus);
     if (secondNumber === 0 && operator === bDivide.textContent) {
       calcDisplay.textContent = "LOL";
       resetValues();
@@ -86,14 +103,12 @@ buttons.forEach((button) => {
         calcDisplay.textContent = showResult();
         operator = button.textContent;
       }
-
-      console.log("firstNumber:", firstNumber);
-      console.log("secondNumber:", secondNumber);
     }
   });
 });
 
 bEquals.addEventListener("click", () => {
+  firstMinus = "";
   if (secondNumber === 0 && operator === bDivide.textContent) {
     calcDisplay.textContent = "LOL";
     resetValues();
@@ -129,6 +144,7 @@ function showResult() {
 }
 
 function resetValues() {
+  firstMinus = "";
   displayValue = "";
   firstNumber = "";
   secondNumber = "";
